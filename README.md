@@ -15,7 +15,7 @@ Additional...
 
 # Wireframes
 The app will have a single screen with an information modal. The controls and access to the information modal will be on a bar on top of the projectile visualizer.
-![Wireframe](/Users/italo/Desktop/JS_Wireframe.png)
+![Wireframe](JS_Wireframe.png)
 
 # Architecture and Technologies
 The project will use the following technologies:
