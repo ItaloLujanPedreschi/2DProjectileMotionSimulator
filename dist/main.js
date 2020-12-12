@@ -173,6 +173,10 @@ function getGravityVector(gravityMPS = 9.80665) {
     return [gravityPxPFX, gravityPxPFY];
 }
 
+function square(value) {
+    return value * value;
+}
+
 //****************************************************************************//
 
 
@@ -390,7 +394,7 @@ function drawTime(time) {
     context.font = "24px Arial";
     context.textAlign = "center";
     context.fillStyle = "black";
-    context.fillText(`Air time: ${(time / 60).toFixed(3)} seconds`, 400, 400);
+    context.fillText(`Air time: ${(time / 60).toFixed(3)} seconds`, (Field.X_START + Field.X_END) / 2, ((Field.Y_START + Field.Y_END) / 2) - 30);
 }
 
 //****************************************************************************//
@@ -399,8 +403,7 @@ function drawTime(time) {
 //******************************* Show Distance ******************************//
 
 function getDistance(speed, angle, gravity) {
-    debugger;
-    let timeForDistance = getTime();
+    let timeForDistance = getTime(speed, angle, gravity);
     let velocityForDistance = getVelocityVector(speed, angle);
     return (timeForDistance * velocityForDistance[0]);
 }
@@ -409,7 +412,7 @@ function drawDistance(distance) {
     context.font = "24px Arial";
     context.textAlign = "center";
     context.fillStyle = "black";
-    context.fillText(`Horizontal distance traveled: ${(distance / 4).toFixed(3)} meters`, 400, 430);
+    context.fillText(`Horizontal distance traveled: ${(distance / 4).toFixed(3)} meters`, (Field.X_START + Field.X_END) / 2, (Field.Y_START + Field.Y_END) / 2);
 }
 
 //****************************************************************************//
@@ -418,17 +421,16 @@ function drawDistance(distance) {
 //****************************** Show Max Height *****************************//
 
 function getMaxHeight(speed, angle, gravity) {
-    debugger;
     let velocityForDistance = getVelocityVector(speed, angle);
     let gravityForTime = getGravityVector(gravity);
-    return (timeForDistance * velocityForDistance[0]);
+    return (square(velocityForDistance[1]) / (2 * gravityForTime[1]));
 }
 
 function drawMaxHeight(height) {
     context.font = "24px Arial";
     context.textAlign = "center";
     context.fillStyle = "black";
-    context.fillText(`Horizontal distance traveled: ${(distance / 4).toFixed(3)} meters`, 400, 430);
+    context.fillText(`Maximum height: ${(height / 8).toFixed(3)} meters`, (Field.X_START + Field.X_END) / 2, ((Field.Y_START + Field.Y_END) / 2) + 30);
 }
 
 //****************************************************************************//
@@ -504,7 +506,7 @@ function launch() {
     masterResetBool = false;
     time = getTime(velocity, angle, gravity);
     distance = getDistance(velocity, angle, gravity);
-    distance = getMaxHeight(velocity, angle, gravity);
+    height = getMaxHeight(velocity, angle, gravity);
     draw();
 }
 
@@ -536,6 +538,7 @@ function draw() {
         document.getElementById("reset").classList.add("opaque");
         drawTime(time);
         drawDistance(distance);
+        drawMaxHeight(height);
         launchButtonToResetButton();
         cancelAnimationFrame(interval);
         if (masterResetBool === true) {
@@ -552,7 +555,6 @@ function draw() {
             requestAnimationFrame(draw);
         }
     }
-    console.log("here");
 }
 
 //****************************************************************************//
