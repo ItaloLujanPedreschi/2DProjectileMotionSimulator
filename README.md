@@ -1,4 +1,6 @@
-# JavascriptProject
+https://italolujanpedreschi.github.io/2DProjectileMotionSimulator/
+
+# 2DProjectileMotionSimulator
 
 Proposal: 2D Projectile Motion Simulator
 
