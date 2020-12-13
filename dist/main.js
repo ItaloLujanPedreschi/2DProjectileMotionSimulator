@@ -385,6 +385,9 @@ function drawGrid() {
 //********************************* Show Time ********************************//
 
 function getTime(speed, angle, gravity) {
+    if (gravity === "0") {
+        return 0;
+    }
     let velocityForTime = getVelocityVector(speed, angle);
     let gravityForTime = getGravityVector(gravity);
     return (velocityForTime[1] / gravityForTime[1]);
@@ -403,6 +406,9 @@ function drawTime(time) {
 //******************************* Show Distance ******************************//
 
 function getDistance(speed, angle, gravity) {
+    if (gravity === "0") {
+        return 0;
+    }
     let timeForDistance = getTime(speed, angle, gravity);
     let velocityForDistance = getVelocityVector(speed, angle);
     return (timeForDistance * velocityForDistance[0]);
@@ -421,6 +427,9 @@ function drawDistance(distance) {
 //****************************** Show Max Height *****************************//
 
 function getMaxHeight(speed, angle, gravity) {
+    if (gravity === "0") {
+        return 0;
+    }
     let velocityForDistance = getVelocityVector(speed, angle);
     let gravityForTime = getGravityVector(gravity);
     return (square(velocityForDistance[1]) / (2 * gravityForTime[1]));
@@ -525,7 +534,11 @@ function draw() {
         document.getElementById("reset").removeEventListener("click", masterReset);
         if (ball.fired === true) {
             document.getElementById("launch").removeEventListener("click", launch);
-            ball.vel = getVelocityVector(velocity, angle);
+            if (ball.vel[0] === 0 && ball.vel[1] < 0) {
+                ball.pos = [100, 521];
+            } else {
+                ball.vel = getVelocityVector(velocity, angle);
+            }
             ball.acc = getGravityVector(gravity);
             ball.move();
             ball.accelerate();
@@ -533,7 +546,7 @@ function draw() {
         if (masterResetBool === false) {
             interval = requestAnimationFrame(draw);
         }
-    }  else if (ball.pos[1] > Field.Y_END) {
+    }  else if (ball.pos[1] >= Field.Y_END) {
         document.getElementById("reset").removeEventListener("click", masterReset);
         document.getElementById("reset").classList.add("opaque");
         drawTime(time);
@@ -545,7 +558,7 @@ function draw() {
             clickReset();
             masterResetBool = false;
         }
-    } else if (ball.pos[0] >= Field.X_START && ball.pos[1] <= Field.Y_END) {
+    } else if (ball.pos[0] >= Field.X_START && ball.pos[1] < Field.Y_END) {
         if (document.getElementById("instructions-modal").classList[0] === "hidden") {
             document.getElementById("reset").addEventListener("click", masterReset);
         }
