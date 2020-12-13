@@ -228,22 +228,22 @@ document.getElementById("gravity-value").addEventListener("input", () => {
 //****************************************************************************//
 
 
-//***************************** Velocity Slider ******************************//
+//***************************** Speed Slider ******************************//
 
-let velocitySlider = document.getElementById("velocity");
-document.getElementById("velocity-value").value = velocitySlider.value;
-velocity = document.getElementById("velocity-value").value;
+let speedSlider = document.getElementById("speed");
+document.getElementById("speed-value").value = speedSlider.value;
+speed = document.getElementById("speed-value").value;
 
-document.getElementById("velocity").addEventListener("input", () => {
-    velocity = document.getElementById("velocity-value").value = velocitySlider.value;
+document.getElementById("speed").addEventListener("input", () => {
+    speed = document.getElementById("speed-value").value = speedSlider.value;
 });
 
-document.getElementById("velocity-value").addEventListener("input", () => {
-    velocity = document.getElementById("velocity-value").value;
-    if (velocity === "") {
-        velocity = velocitySlider.value;
+document.getElementById("speed-value").addEventListener("input", () => {
+    speed = document.getElementById("speed-value").value;
+    if (speed === "") {
+        speed = speedSlider.value;
     }
-    document.getElementById("velocity").value = velocity;
+    document.getElementById("speed").value = speed;
 });
 
 //****************************************************************************//
@@ -503,9 +503,9 @@ function launch() {
         document.getElementById("gravity-value").value = 9.80665;
         gravity = 9.80665;
     }
-    if (document.getElementById("velocity-value").value === "") {
-        document.getElementById("velocity-value").value = 20;
-        velocity = 20;
+    if (document.getElementById("speed-value").value === "") {
+        document.getElementById("speed-value").value = 20;
+        speed = 20;
     }
     document.getElementById("launch").classList.add("launch-container-active");
     document.getElementById("reset").addEventListener("click", masterReset);
@@ -513,9 +513,9 @@ function launch() {
     disableInputs();
     ball.fired = true;
     masterResetBool = false;
-    time = getTime(velocity, angle, gravity);
-    distance = getDistance(velocity, angle, gravity);
-    height = getMaxHeight(velocity, angle, gravity);
+    time = getTime(speed, angle, gravity);
+    distance = getDistance(speed, angle, gravity);
+    height = getMaxHeight(speed, angle, gravity);
     draw();
 }
 
@@ -537,7 +537,7 @@ function draw() {
             if (ball.vel[0] === 0 && ball.vel[1] < 0) {
                 ball.pos = [100, 521];
             } else {
-                ball.vel = getVelocityVector(velocity, angle);
+                ball.vel = getVelocityVector(speed, angle);
             }
             ball.acc = getGravityVector(gravity);
             ball.move();

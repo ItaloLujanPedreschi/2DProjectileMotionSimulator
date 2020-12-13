@@ -247,9 +247,9 @@ input[type=number] {
     cursor: pointer;
 }
 
-/* Velocity */
+/* Speed */
 
-#velocity {
+#speed {
     -webkit-appearance: none;
     display: block;
     width: 300px;
@@ -262,11 +262,11 @@ input[type=number] {
     transition: opacity .2s;
 }
 
-#velocity:hover {
+#speed:hover {
     background: #c5c5c5;
 }
 
-#velocity::-webkit-slider-thumb {
+#speed::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 25px;
@@ -276,30 +276,30 @@ input[type=number] {
     cursor: pointer;
 }
 
-#velocity:hover::-webkit-slider-thumb {
+#speed:hover::-webkit-slider-thumb {
     background: #ff0000;
     box-shadow: 0px 0px 1px 1px rgb(255, 0, 0);
 }
 
-.velocity-container {
+.speed-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
 }
 
-.velocity-text {
+.speed-text {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.velocity-text input {
+.speed-text input {
     margin-left: 20px;
 }
 
-#velocity-value {
+#speed-value {
     width: 60px;
 }
 

@@ -12,12 +12,12 @@
         <div id="content" class="content opaque">
             <div class="controls-container">
                 <div class="controls">
-                    <div class="velocity-container">
-                        <div class="velocity-text">
-                            <p class="unselectable">Initial Velocity</p>
-                            <input type="number" min="0" max="100" id="velocity-value">
+                    <div class="speed-container">
+                        <div class="speed-text">
+                            <p class="unselectable">Initial Speed</p>
+                            <input type="number" min="0" max="100" id="speed-value">
                         </div>
-                        <input type="range" min="0" max="100" step="0.001" value="20" class="slider" id="velocity">
+                        <input type="range" min="0" max="100" step="0.001" value="20" class="slider" id="speed">
                     </div>
                     <div id="open-modal">
                         <p class="unselectable">Open<br>Instructions</p>
@@ -45,13 +45,13 @@
         <div id="instructions-modal">
             <div id="close-modal">X</div>
             <h1 class="unselectable">2D Projectile Motion Simulator</h1>
-            <p class="unselectable">Welcome to the 2D Projectile Motion Simulator! In this sandbox environment, you will be able to manipulate takeoff angle, initial velocity, and gravity. A visual simulation will run to demonstrate your system in action!</p>
+            <p class="unselectable">Welcome to the 2D Projectile Motion Simulator! In this sandbox environment, you will be able to manipulate takeoff angle, initial speed, and gravity. A visual simulation will run to demonstrate your system in action!</p>
             <div class="unselectable">
                 <p>Extra information:</p>
                 <ul>
                     <li>Grid units are in meters.</li>
                     <li>Default gravitational acceleration constant used is 9.80665m/s<span class="sup">2</span>.</li>
-                    <li>Initial velocity is in meters per second.</li>
+                    <li>Initial speed is in meters per second.</li>
                     <li>Launch angle is in degrees.</li>
                     <li>The ball may fly out of the visual field, however, it is still in motion so the simulation will not stop until it lands.</li>
                     <li>MASTER RESET IS TO BE USED TO RESET FIELD WHILE BALL IS IN MOTION.</li>
