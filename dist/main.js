@@ -320,6 +320,15 @@ function drawCannon(launchAngle = 45) {
     context.closePath();
 }
 
+function drawRightSidebar() {
+    context.beginPath();
+    context.rect(Field.X_END, Field.Y_START, 100, Field.HEIGHT);
+    context.fillStyle = "#eee";
+    context.fill();
+    context.closePath();
+
+}
+
 //********************************** Grid ************************************//
 
 function drawGrid() {
@@ -530,6 +539,7 @@ function draw() {
     drawCannon(parseInt(angle));
     ball.draw();
     drawGrid();
+    drawRightSidebar();
     if (ball.pos[0] === Field.X_START && ball.pos[1] === Field.Y_END) {
         document.getElementById("reset").removeEventListener("click", masterReset);
         if (ball.fired === true) {
