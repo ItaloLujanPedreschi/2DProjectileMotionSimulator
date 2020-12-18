@@ -9,7 +9,7 @@ Proposal: 2D Projectile Motion Simulator
 
 ## Functionality & MVP
 Users will be able to...
-* Choose a projectile's initial velocity, launch angle, launch height, launch force, mass, travel distance, travel height, and gravity.
+* Choose a projectile's initial velocity, launch angle, and gravity.
 * Run simulations and receive information about projectile
 Additional...
 * Start with instruction modal
@@ -34,5 +34,5 @@ Day 3: Create instructions modal. Create spreadsheet of inputs based off simulat
 Day 4: Allow user to choose height of initial projectile launch. Animate changes in height.
 
 ## Bonus Features
-* Include air resistance
-* Add "targets" and implement "game" mode allowing users to place the target at their calculated landing point.
+* Add table with launch data
+* Allow ability to changed launch height
