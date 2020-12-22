@@ -36,35 +36,32 @@ After launch, the reset button becomes available after the projectile returns to
 
 ![Master Reset](src/github-visuals/fired_buttons.png)
 
-## Album Create
+## Drawing the Cannon
 
-The creation of an album required the ability to select and deselect images and for those images' styling to differ based on their state. The state included a photo_ids array to which the IDs of selected photos are added and deselected photos are removed. A conditional is used for this function. Vanilla DOM manipulation is used to add the "selected-for-album" class to the clicked image giving it the selected styling.
-### Photo Selection
+The drawing of the cannon was done in HTML canvas. This was nothing more than a simple bezier curve, however the cannon must rotate between being pointed East to North without any distortion. This was done by making all four points on the bezier curve the products of equations using the cannon angle as its only variable input.
+### Bezier Curve Handling
 ```
-constructor(props) {
-    super(props);
-    this.state = {
-        name: "new album",
-        description: "",
-        photo_ids: []
-    }
-    this.handleInput = this.handleInput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlePhotoClick = this.handlePhotoClick.bind(this);
-}
-
-handlePhotoClick(e) {
-    let photoId = parseInt(e.currentTarget.id);
-    let checkPhotoAlreadySelected = this.state.photo_ids.indexOf(photoId);
-    let new_photo_ids = Array.from(this.state.photo_ids);
-    if (checkPhotoAlreadySelected === -1) {
-        e.currentTarget.classList.add("selected-for-album");
-        new_photo_ids.push(photoId);
-        this.setState({ photo_ids: new_photo_ids });
-    } else {
-        e.currentTarget.classList.remove("selected-for-album");
-        new_photo_ids.splice(checkPhotoAlreadySelected, 1);
-        this.setState({ photo_ids: new_photo_ids });
-    }
-}
+const cannonRadius = 40;
+let topLipAngle = degreesToRadians(launchAngle + 15);
+let adjustCannonTopX = (cannonRadius * Math.cos(topLipAngle));
+let adjustCannonTopY = (cannonRadius * Math.sin(topLipAngle));
+let lowerLipAngle = degreesToRadians(launchAngle - 15);
+let adjustCannonBottomX = (cannonRadius * Math.cos(lowerLipAngle));
+let adjustCannonBottomY = (cannonRadius * Math.sin(lowerLipAngle));
+const bezierRadius = 50;
+let topBezierAngle = degreesToRadians(launchAngle + 145);
+let adjustBezierTopX = (bezierRadius * Math.cos(topBezierAngle));
+let adjustBezierTopY = (bezierRadius * Math.sin(topBezierAngle));
+let bottomBezierAngle = degreesToRadians(launchAngle + 215);
+let adjustBezierBottomX = (bezierRadius * Math.cos(bottomBezierAngle));
+let adjustBezierBottomY = (bezierRadius * Math.sin(bottomBezierAngle));
+(-40, 5)
+context.beginPath();
+context.moveTo(Field.X_START + adjustCannonTopX, Field.Y_END - adjustCannonTopY);
+context.bezierCurveTo(Field.X_START + adjustBezierTopX, Field.Y_END - adjustBezierTopY, Field.X_START + adjustBezierBottomX, Field.Y_END - adjustBezierBottomY, Field.X_START + adjustCannonBottomX, Field.Y_END - adjustCannonBottomY);
+context.strokeStyle = "#1f37d1";
+context.stroke();
+context.fillStyle = "#1f37d1";
+context.fill();
+context.closePath();
 ```
