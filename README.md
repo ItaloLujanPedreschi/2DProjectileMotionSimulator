@@ -1,5 +1,3 @@
-https://italolujan.com/2DProjectileMotionSimulator/
-
 # 2DProjectileMotionSimulator
 
 ![2DProjectileMotionSimulator Banner](src/github-visuals/2d_projectile_motion_simulator.png)
@@ -7,17 +5,21 @@ https://italolujan.com/2DProjectileMotionSimulator/
   <a href="https://italolujan.com/2DProjectileMotionSimulator/">Live Site</a>
 </div>
 
-Proposal: 2D Projectile Motion Simulator
+2D Projectile Motion Simulator is a visual simulation of the classical mechanics problem of projectile motion.
 
-## Background
-2D Projectile Motion Simulator is a visual simulation of the classical mechanics problem of projectile motion. Simulations will be recorded for analysis by user.
+
+# Technologies Stack
+
+* HTML with Canvas - Simple drawings and requestAnimationFrame allowed for smooth regulated framerate leading to predictable projectile speed
+* CSS - Easy to implement styling
+* Javascript - Allowed for DOM manipulation to allow for more function than a purely HTML/CSS combination
+
 
 ## Functionality & MVP
-Users will be able to...
+Users are be able to...
+* Start with an instruction modal
 * Choose a projectile's initial velocity, launch angle, and gravity.
-* Run simulations and receive information about projectile
-Additional...
-* Start with instruction modal
+* Run simulations and receive information about projectile flight including flight time, max height, and horizontal travel distance.
 * Open instructions modal from in app
 
 ## Wireframes
