@@ -2,6 +2,11 @@ https://italolujan.com/2DProjectileMotionSimulator/
 
 # 2DProjectileMotionSimulator
 
+![2DProjectileMotionSimulator Banner](src/github-visuals/2d-projectile-motion-simulator.png)
+<div align="center">
+  <a href="https://italolujan.com/2DProjectileMotionSimulator/">Live Site</a>
+</div>
+
 Proposal: 2D Projectile Motion Simulator
 
 ## Background
