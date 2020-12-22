@@ -1,4 +1,4 @@
-https://italolujanpedreschi.github.io/2DProjectileMotionSimulator/
+https://italolujan.com/2DProjectileMotionSimulator/
 
 # 2DProjectileMotionSimulator
 
