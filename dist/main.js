@@ -459,6 +459,51 @@ function drawMaxHeight(height) {
 //****************************************************************************//
 
 
+//****************************** Tracking Lines ******************************//
+
+function drawTrackingLines(ballPos) {
+    // Left
+    context.beginPath();
+    context.lineWidth = 1;
+    context.strokeStyle = "#cf3e21";
+    context.moveTo(Field.X_START, ballPos[1]);
+    if (ballPos[0] > Field.X_END) {
+        context.lineTo(Field.X_END, ballPos[1]);
+    } else {
+        context.lineTo(ballPos[0], ballPos[1]);
+    }
+    context.stroke();
+
+    if (ballPos[0] < Field.X_END) {
+        // Right
+        context.beginPath();
+        context.lineWidth = 1;
+        context.strokeStyle = "#cf3e21";
+        context.moveTo(ballPos[0], ballPos[1]);
+        context.lineTo(Field.X_END, ballPos[1]);
+        context.stroke();
+
+        // Top
+        context.beginPath();
+        context.lineWidth = 1;
+        context.strokeStyle = "#cf3e21";
+        context.moveTo(ballPos[0], Field.Y_START);
+        context.lineTo(ballPos[0], ballPos[1]);
+        context.stroke();
+
+        // Bottom
+        context.beginPath();
+        context.lineWidth = 1;
+        context.strokeStyle = "#cf3e21";
+        context.moveTo(ballPos[0], ballPos[1]);
+        context.lineTo(ballPos[0], Field.Y_END);
+        context.stroke();
+    }
+}
+
+//****************************************************************************//
+
+
 //**************************** No Landing Warning ****************************//
 
 function drawNoLandingWarning() {
@@ -613,6 +658,8 @@ function draw() {
             ball.accelerate();
             requestAnimationFrame(draw);
         }
+
+        drawTrackingLines(ball.pos);
 
         if (gravity == 0) {
             drawNoLandingWarning();
