@@ -326,7 +326,6 @@ function drawRightSidebar() {
     context.fillStyle = "#eee";
     context.fill();
     context.closePath();
-
 }
 
 //********************************** Grid ************************************//
@@ -397,8 +396,10 @@ function getTime(speed, angle, gravity) {
     if (gravity === "0") {
         return 0;
     }
+
     let velocityForTime = getVelocityVector(speed, angle);
     let gravityForTime = getGravityVector(gravity);
+
     return (velocityForTime[1] / gravityForTime[1]);
 }
 
@@ -418,8 +419,10 @@ function getDistance(speed, angle, gravity) {
     if (gravity === "0") {
         return 0;
     }
+
     let timeForDistance = getTime(speed, angle, gravity);
     let velocityForDistance = getVelocityVector(speed, angle);
+
     return (timeForDistance * velocityForDistance[0]);
 }
 
@@ -439,8 +442,10 @@ function getMaxHeight(speed, angle, gravity) {
     if (gravity === "0") {
         return 0;
     }
+
     let velocityForDistance = getVelocityVector(speed, angle);
     let gravityForTime = getGravityVector(gravity);
+
     return (square(velocityForDistance[1]) / (2 * gravityForTime[1]));
 }
 
@@ -454,16 +459,35 @@ function drawMaxHeight(height) {
 //****************************************************************************//
 
 
+//**************************** No Landing Warning ****************************//
+
+function drawNoLandingWarning() {
+    context.font = "24px Arial";
+    context.textAlign = "center";
+    context.fillStyle = "red";
+    context.fillText("WARNING: Ball will never land.", (Field.X_START + Field.X_END) / 2, ((Field.Y_START + Field.Y_END) / 2));
+
+    context.font = "24px Arial";
+    context.textAlign = "center";
+    context.fillStyle = "red";
+    context.fillText("Press Master Reset to perform another simulation.", (Field.X_START + Field.X_END) / 2, ((Field.Y_START + Field.Y_END) / 2) + 30);
+}
+
+//****************************************************************************//
+
+
 //******************************** Master Reset ******************************//
 
 function masterReset() {
     masterResetBool = true;
+
     if (document.getElementById("launch-text").innerHTML === "Reset") {
         resetButtonToLaunchButton();
     } else {
         document.getElementById("launch").classList.remove("launch-container-active");
         document.getElementById("launch").addEventListener("click", launch);
     }
+
     ball.reset();
     ball.pos = [100, 521];
     enableInputs();
@@ -486,6 +510,7 @@ function launchButtonToResetButton() {
     launch.classList.remove("launch-container-active");
     launch.classList.add("launch-container-reset");
     document.getElementById("launch-text").innerHTML = "Reset";
+    
     if (document.getElementById("instructions-modal").classList[0] === "hidden") {
         launch.addEventListener("click", clickReset);
     }
@@ -508,17 +533,21 @@ function launch() {
         document.getElementById("cannon-angle-value").value = 45;
         angle = 45;
     }
+
     if (document.getElementById("gravity-value").value === "") {
         document.getElementById("gravity-value").value = 9.80665;
         gravity = 9.80665;
     }
+
     if (document.getElementById("speed-value").value === "") {
         document.getElementById("speed-value").value = 20;
         speed = 20;
     }
+
     document.getElementById("launch").classList.add("launch-container-active");
     document.getElementById("reset").addEventListener("click", masterReset);
     document.getElementById("reset").classList.remove("opaque");
+
     disableInputs();
     ball.fired = true;
     masterResetBool = false;
@@ -542,28 +571,34 @@ function draw() {
     drawRightSidebar();
     if (ball.pos[0] === Field.X_START && ball.pos[1] === Field.Y_END) {
         document.getElementById("reset").removeEventListener("click", masterReset);
+
         if (ball.fired === true) {
             document.getElementById("launch").removeEventListener("click", launch);
+
             if (ball.vel[0] === 0 && ball.vel[1] < 0) {
                 ball.pos = [100, 521];
             } else {
                 ball.vel = getVelocityVector(speed, angle);
             }
+
             ball.acc = getGravityVector(gravity);
             ball.move();
             ball.accelerate();
         }
+
         if (masterResetBool === false) {
             interval = requestAnimationFrame(draw);
         }
     }  else if (ball.pos[1] >= Field.Y_END) {
         document.getElementById("reset").removeEventListener("click", masterReset);
         document.getElementById("reset").classList.add("opaque");
+
         drawTime(time);
         drawDistance(distance);
         drawMaxHeight(height);
         launchButtonToResetButton();
         cancelAnimationFrame(interval);
+
         if (masterResetBool === true) {
             clickReset();
             masterResetBool = false;
@@ -572,10 +607,15 @@ function draw() {
         if (document.getElementById("instructions-modal").classList[0] === "hidden") {
             document.getElementById("reset").addEventListener("click", masterReset);
         }
+
         if (masterResetBool === false) {
             ball.move();
             ball.accelerate();
             requestAnimationFrame(draw);
+        }
+
+        if (gravity == 0) {
+            drawNoLandingWarning();
         }
     }
 }
