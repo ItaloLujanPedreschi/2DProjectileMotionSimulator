@@ -8,6 +8,8 @@ body {
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     font-family: sans-serif;
 }
 
@@ -35,7 +37,6 @@ canvas {
 .content {
     position: relative;
     width: auto;
-    margin-top: 100px;
     border: 20px ridge #e3e3e3;
 }
 
@@ -92,7 +93,8 @@ canvas {
     align-items: center;
     color: skyblue;
     border-radius: 10px;
-    top: 220px;
+    top: 50%;
+    transform: translate(0, -50%);
     height: 480px;
     width: 720px;
     line-height: 1.3em;
