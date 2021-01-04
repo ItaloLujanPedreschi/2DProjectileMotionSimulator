@@ -40,7 +40,7 @@ After launch, the reset button becomes available after the projectile returns to
 
 The drawing of the cannon was done in HTML canvas. This was nothing more than a simple bezier curve, however the cannon must rotate between being pointed East to North without any distortion. This was done by making all four points on the bezier curve the products of equations using the cannon angle as its only variable input.
 ### Bezier Curve Handling
-```
+```javascript
 const cannonRadius = 40;
 let topLipAngle = degreesToRadians(launchAngle + 15);
 let adjustCannonTopX = (cannonRadius * Math.cos(topLipAngle));
