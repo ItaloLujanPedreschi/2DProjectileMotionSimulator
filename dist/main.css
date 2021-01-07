@@ -4,6 +4,7 @@
 }
 
 body {
+    background-color: #eee;
     position: relative;
     display: flex;
     justify-content: center;
@@ -34,6 +35,8 @@ canvas {
 .content {
     position: relative;
     width: auto;
+    margin-top: 100px;
+    border: 20px ridge #e3e3e3;
 }
 
 .links-container {
@@ -89,9 +92,18 @@ canvas {
     align-items: center;
     color: skyblue;
     border-radius: 10px;
-    top: 120px;
+    top: 220px;
     height: 480px;
     width: 720px;
+    line-height: 1.3em;
+}
+
+#instructions-modal .modal-header {
+    text-align: center;
+}
+
+#instructions-modal .modal-header h3 {
+    margin-top: 10px;
 }
 
 #instructions-modal p {
